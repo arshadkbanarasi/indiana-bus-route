@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Hero } from "@/components/Hero";
 import { RouteSearch } from "@/components/RouteSearch";
 import { BusResults } from "@/components/BusResults";
+import { Button } from "@/components/ui/button";
+import { LogIn } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
@@ -12,6 +15,7 @@ const Index = () => {
     buses: any[];
   } | null>(null);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSearch = (from: string, to: string, date: Date) => {
     // Simulate API call with timeout
@@ -53,6 +57,22 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Navigation Header */}
+      <div className="absolute top-0 left-0 right-0 z-50 p-4">
+        <div className="container mx-auto flex justify-between items-center">
+          <div className="text-white font-bold text-xl">Bus Booking System</div>
+          <Button 
+            variant="outline" 
+            size="sm"
+            className="bg-white/20 text-white border-white/30 hover:bg-white/30"
+            onClick={() => navigate("/auth")}
+          >
+            <LogIn className="mr-2 h-4 w-4" />
+            Login / Sign Up
+          </Button>
+        </div>
+      </div>
+      
       <Hero />
       
       {/* Search Section */}
